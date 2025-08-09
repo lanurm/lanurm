@@ -1,0 +1,46 @@
+name: Generate Pacman Contribution Graph
+
+on:
+  schedule:
+    - cron: "0 0 * * *"  # Runs once daily at midnight UTC
+  workflow_dispatch:      # Allow manual runs
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Pacman Generator
+        run: npm install -g github-contribution-grid-snake
+
+      - name: Generate Pacman SVG (last 90 days)
+        run: |
+          github-contribution-grid-snake \
+            --username lanurm \
+            --months 3 \
+            --color-scheme dark \
+            --output pacman-contribution-graph-dark.svg
+          github-contribution-grid-snake \
+            --username lanurm \
+            --months 3 \
+            --color-scheme light \
+            --output pacman-contribution-graph.svg
+
+      - name: Commit & Push to output branch
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git checkout -B output
+          mv pacman-contribution-graph*.svg ./
+          git add pacman-contribution-graph*.svg
+          git commit -m "Update Pacman graph"
+          git push origin output --force
