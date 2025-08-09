@@ -13,6 +13,7 @@ jobs:
       - uses: Platane/snk@v3
         with:
           github_user_name: lanurm
+          from: "2025-05-01"
           outputs: |
             dist/pacman-contribution-graph.svg
             dist/pacman-contribution-graph-dark.svg?palette=github-dark
