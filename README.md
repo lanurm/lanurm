@@ -124,9 +124,6 @@ From **computer vision** tools to **distributed data systems**, I enjoy turning 
   <img alt="pacman contribution graph" src="https://raw.githubusercontent.com/lanurm/lanurm/output/pacman-contribution-graph.svg">
 </picture>
 
-## ⚡ Fun Fact
-_"My code works perfectly… until it’s in production."_ 😄  
-
 ---
 
 <p align="center">
